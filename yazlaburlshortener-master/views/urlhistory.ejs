@@ -1,0 +1,193 @@
+ <!-- Begin page -->
+ <div id="wrapper">
+
+    <!-- Top Bar Start -->
+    <div class="topbar">
+
+        <!-- LOGO -->
+        <div class="topbar-left">
+            <a href="/" class="logo">
+                <span class="logo-light">
+                    <i style="font-size: 25px;"class="mdi mdi-fire"></i> URL KISALTICI
+                </span>
+                <span class="logo-sm">
+                    <i  class="mdi mdi-fire"></i>
+                </span>
+            </a>
+        </div>
+
+        <nav class="navbar-custom">
+            <ul class="navbar-right list-inline float-right mb-0">
+                
+                <li class="dropdown notification-list list-inline-item">
+                    <div class="dropdown notification-list nav-pro-img">
+                        <a class="dropdown-toggle nav-link arrow-none nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <img src="dashboard/images/users/user-4.jpg" alt="user" class="rounded-circle">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            <!-- item-->
+
+                            
+                            <a style="color:darkred;font-size: 15px;"  href="/users/logout"><div><i style="color:darkred;font-size: 30px;" class="mdi mdi-power"></i><b> Çıkış</b></div></a>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+
+            <ul class="list-inline menu-left mb-0">
+                <li class="float-left">
+                    <button class="button-menu-mobile open-left waves-effect">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+                </li>
+                
+            </ul>
+
+        </nav>
+
+    </div>
+    <!-- Top Bar End -->
+
+   <!-- ========== Left Sidebar Start ========== -->
+   <div class="left side-menu">
+    <div class="slimscroll-menu" id="remove-scroll">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu" id="side-menu">
+                <li class="menu-title">Menu</li>
+                <li>
+                    <a href="/dashboard" class="waves-effect">
+                        <i class="icon-accelerator"></i><span> Panel </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="#" class="waves-effect">
+                        <i class="fa fa-list"></i><span> Url Geçmişi </span>
+                    </a>
+                </li>
+                <% if (user.isAdmin) { %> 
+                    <li>
+                        <a href="/dashboard/admin" class="waves-effect">
+                            <i class="fa fa-cubes"></i><span> Admin Paneli </span>
+                        </a>
+                    </li>  
+                <% } %>
+
+            </ul>
+
+        </div>
+        <!-- Sidebar -->
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>
+<!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="page-title-box">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <!--<h4 class="page-title">Url Shortner</h4>-->
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-right">
+                                <li class="breadcrumb-item" style="font-size: medium; right:15px"><a href="javascript:void(0);"><b>HOŞGELDİN,  <%= user.name %> </b> </a></li>
+                            </ol>
+                        </div>
+                    </div> <!-- end row -->
+                </div>
+                <!-- end page-title -->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card m-b-30">
+                            <div class="card-body">
+
+                                <h4 style="color:deeppink" class="mt-0 header-title">Url Geçmişi</h4>
+                                <h5 class="sub-title">
+                                    Kısalttığınız tüm <code class="highlighter-rouge"> linkleri </code> burada bulabilirisniz.
+                                </h5>
+                                <!--Start Message Display-->
+                                <% if(alert) { %> 
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <%= alert %> 
+                                    </div>
+                                <% } %>
+                                <% if(error) { %>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <%= error %> 
+                                    </div>
+                                <% } %>
+                                <!--End Message Display-->
+                                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; max-width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Hedef Link</th>
+                                            <th>Kısa Ad </th>
+                                            <th>Oluşturma Tarihi</th>
+                                            <th>Geçerlilik Süresi</th>
+                                            <th>Tıklanma Sayısı</th>
+                                            <th>Düzenle</th>
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                        <% urls.forEach(url => {%> 
+                                            <tr>
+                                                <td style="max-width:600px"><a href="<%= url.url %>" target="_blank"><%= url.url %></a></td>
+                                                <td style="min-width:100px"><%= url.slug %> <a style="color:deeppink" href="http://bsm-sh.onrender.com/<%=url.slug%>" >Git</a></td>
+                                                <td><%= url.createdOn %> </td>
+                                                <td><%= url.validFor ? (url.validFor + 'Gün') : 'Sınırsız' %></td>
+                                                <td style="max-width:50px"><%= url.clickCount %> </td>
+                                                <td>
+                                                    <div>
+                                                        <form action="/dashboard/url" method="post">
+                                                            <input type="hidden" name="slug" id="slug" value="<%=url.slug%>">
+                                                            <button type="submit" value="submit" class="btn btn-warning btn-sm">Sil</button>
+                                                        </form>        
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <% }) %>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+
+                
+            </div>
+            <!-- container-fluid -->
+
+        </div>
+        <!-- content -->
+
+       
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Right content here -->
+    <!-- ============================================================== -->
+
+</div>

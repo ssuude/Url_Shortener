@@ -1,0 +1,46 @@
+    <!-- Begin page -->
+    <div class="accountbg"></div>
+    <div class="home-btn d-none d-sm-block">
+        <a href="/" class="text-white"><i class="fas fa-home h2"></i></a>
+    </div>
+    <div class="wrapper-page">
+    <div class="card card-pages shadow-none">
+        <div class="card-body">
+            <h5 class="font-18 text-center" > <b>Giriş</b>  </h5>
+
+            <%- include ("partials/messages") %> 
+
+            <form class="form-horizontal m-t-30" method="POST" action="/users/login">
+
+                <div class="form-group">
+                    <div class="col-12">
+                            <label>Email</label>
+                        <input class="form-control" type="text" required placeholder="Email Giriniz" name="email" id="email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-12">
+                            <label>Şifre</label>
+                        <input class="form-control" type="password" required placeholder="Şifre Giriniz" id="password" name="password">
+                    </div>
+                </div>
+
+                <div class="form-group text-center m-t-20">
+                    <div class="col-12">
+                        <button class="btn btn-primary btn-block btn-lg waves-effect waves-light" type="submit">Giriş Yapın</button>
+                    </div>
+                </div>
+                
+                
+
+                <div class="form-group row m-t-30 m-b-0">
+                    
+                    <div class="col-sm-5 text-right">
+                        <a href="/users/register" class="text-muted">Bir hesap oluşturun</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
